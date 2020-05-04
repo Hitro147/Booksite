@@ -1,1 +1,1 @@
-web: gunicorn ecommerce.wsgi --log-file -
+web: python ecommerce/manage.py runserver 0.0.0.0:$PORT
