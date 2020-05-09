@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def store(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -131,7 +131,7 @@ def registerPage(request):
         return render(request, 'store/register.html', context)
 
 def loginPage(request):
-
+    
     if request.user.is_authenticated:
         return redirect('store')
     else:
