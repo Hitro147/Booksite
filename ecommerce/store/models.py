@@ -18,20 +18,20 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length = 200, null = True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=True)
-    image = models.ImageField(null = True, blank = True)
+    image = models.URLField(null=True)
 
     def __str__(self):
         return self.name
 
-    @property
-    def imageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ""
-        return url
+    # @property
+    # def imageURL(self):
+    #     try:
+    #         url = self.image.url
+    #     except:
+    #         url = ""
+    #     return url
 
 # Order class
 

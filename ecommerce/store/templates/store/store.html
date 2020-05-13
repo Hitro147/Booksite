@@ -10,18 +10,42 @@
         
         
     <div class="col-lg-4">
-        <img class="thumbnail" src="{{ product.imageURL }}">
+        <img class="thumbnail" src="{{ product.image }}">
         <div class="box-element product">
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
             <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
 		    <!-- <a class="btn btn-outline-success" href="#">View</a> -->
-		    <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
+		    <h4 style="display: inline-block; float: right"><strong>Rs.{{product.price|floatformat:2}}</strong></h4>
         </div>
     </div>
 
     {% endfor %}
 
+</div>
+<hr>
+<div>
+    {% if products.has_other_pages %}
+        <ul class="pagination justify-content-end">
+            {% if products.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;Previous</a></li>
+            {% else %}
+                <li class="disabled page-item"><span class="page-link">&laquo;Previous</span></li>
+            {% endif %}
+            {% for i in products.paginator.page_range %}
+                {% if productsnumber == i %}
+                    <li class="active page-item page-link"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if products.has_next %}
+                <li class="page-item"><a class="page-link"  href="?page={{ products.next_page_number }}">Next&raquo;</a></li>
+            {% else %}
+                <li class="disabled page-item"><span class="page-link">Next&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
 </div>
 
 {% endblock content %}

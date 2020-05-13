@@ -5,14 +5,25 @@ import json
 import datetime
 from django.contrib import messages
 from .utils import cookieCart, cartData, guestOrder
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 # Create your views here.
 
 def store(request):
     
     data = cartData(request)
     cartItems = data['cartItems']
-    
     products = Product.objects.all()
+
+    paginator = Paginator(products, 9)
+    page = request.GET.get('page')
+    products = paginator.get_page(page)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'store/store.html', context)
 
