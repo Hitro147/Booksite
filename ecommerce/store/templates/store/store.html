@@ -14,9 +14,15 @@
         <div class="box-element product">
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
-            <button  id="add-to-cart" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-		    <!-- <a class="btn btn-outline-success" href="#">View</a> -->
-		    <h4 style="display: inline-block; float: right"><strong>Rs.{{product.price|floatformat:2}}</strong></h4>
+            
+            {% if product.price != 0.0 %}
+                
+                <button  id="add-to-cart" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                <!-- <a class="btn btn-outline-success" href="#">View</a> -->
+                <h4 style="display: inline-block; float: right"><strong>Rs.{{product.price|floatformat:2}}</strong></h4>
+            {% else %}
+                <p>Out of Stock...Check back again Soon.</p>
+            {% endif %}
         </div>
     </div>
 
@@ -28,19 +34,21 @@
     {% if products.has_other_pages %}
         <ul class="pagination justify-content-end">
             {% if products.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page=1">&laquo;First</a></li>
                 <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">&laquo;Previous</a></li>
             {% else %}
                 <li class="disabled page-item"><span class="page-link">&laquo;Previous</span></li>
             {% endif %}
             {% for i in products.paginator.page_range %}
-                {% if productsnumber == i %}
-                    <li class="active page-item page-link"><span>{{ i }}<span class="sr-only">(current)</span></span></li>
-                {% else %}
+                {% if products.number == i %}
+                    <li class="active page-item page-link"><strong><span>{{ i }}<span class="sr-only">(current)</span></span></strong></li>
+                {% elif i > products.number|add:'-3' and i < products.number|add:'3' %}
                     <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
                 {% endif %}
             {% endfor %}
             {% if products.has_next %}
                 <li class="page-item"><a class="page-link"  href="?page={{ products.next_page_number }}">Next&raquo;</a></li>
+                <li class="page-item"><a class="page-link"  href="?page={{ products.paginator.num_pages }}">Last&raquo;</a></li>
             {% else %}
                 <li class="disabled page-item"><span class="page-link">Next&raquo;</span></li>
             {% endif %}
