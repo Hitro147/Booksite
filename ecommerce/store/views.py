@@ -13,6 +13,11 @@ def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
     products = Product.objects.all()
+    search_term = ''
+
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        products = products.filter(name__icontains=search_term)
 
     paginator = Paginator(products, 9)
     page = request.GET.get('page')
@@ -24,7 +29,8 @@ def store(request):
     except EmptyPage:
         products = paginator.page(paginator.num_pages)
 
-    context = {'products': products, 'cartItems': cartItems}
+
+    context = {'products': products, 'cartItems': cartItems, 'search_term': search_term}
     return render(request, 'store/store.html', context)
 
 def cart(request):
