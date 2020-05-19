@@ -26,15 +26,11 @@
         <div class="box-element product">
             <h6><strong>{{product.name}}</strong></h6>
             <hr>
-            
-            {% if product.price != 0.0 %}
-                
-                <button  id="add-to-cart" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                <!-- <a class="btn btn-outline-success" href="#">View</a> -->
-                <h4 style="display: inline-block; float: right"><strong>Rs.{{product.price|floatformat:2}}</strong></h4>
-            {% else %}
-                <p>Out of Stock...Check back again Soon.</p>
-            {% endif %}
+            <p style="font-size: small;">{{product.author}}</p>
+            <hr>
+            <button  id="add-to-cart" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+            <!-- <a class="btn btn-outline-success" href="#">View</a> -->
+            <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
         </div>
     </div>
 
