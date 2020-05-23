@@ -19,7 +19,7 @@ def store(request):
         search_term = request.GET['search']
         products = products.filter(name__icontains=search_term)
 
-    paginator = Paginator(products, 10)
+    paginator = Paginator(products, 9)
     page = request.GET.get('page')
     products = paginator.get_page(page)
     try:
