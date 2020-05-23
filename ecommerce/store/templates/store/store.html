@@ -21,16 +21,23 @@
     
     {% for product in products %}
 
-    <div class="col-lg-4">
-        <img class="thumbnail" src="{{ product.image }}">
-        <div class="box-element product">
-            <h6><strong>{{product.name}}</strong></h6>
+    <div class=" row box-element">
+
+        <div class="col-5">
+            <img class="thumbnail" src="{{ product.image }}">
+        </div>
+
+        <div class="col-7">
+            <h6 class="prodname">{{product.name}}</h6>
             <hr>
-            <p style="font-size: small;">{{product.author}}</p>
+            <p class="prodauthor">{{product.author}}</p>
             <hr>
-            <button  id="add-to-cart" data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-            <!-- <a class="btn btn-outline-success" href="#">View</a> -->
-            <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
+            <div class="wrap">
+                <h4 class="price inleft">${{product.price|floatformat:2}}</h4>
+                <button id="add-to-cart" data-product={{product.id}} data-action="add"
+                    class="inright btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                <!-- <a class="btn btn-outline-success" href="#">View</a> -->
+            </div>
         </div>
     </div>
 
