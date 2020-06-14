@@ -5,8 +5,9 @@
 
 <div class="row">
     <div class="col-lg-6">
-        <div class="box-element" id="form-wrapper">
+        <div class="box-element-for-total" id="form-wrapper">
             <form action="" id="form">
+                {% csrf_token %}
                 <div id="user-info">
                     <p>User Info</p>
                     <hr>
@@ -39,13 +40,13 @@
             </form>
         </div>
         <br>
-        <div class="box-element hidden" id="payment-info">
+        <div class="box-element-for-total hidden" id="payment-info">
             <small>Payment Options</small>
             <hr>
             <button class="btn btn-success btn-block" id="make-payment">Make Payment</button>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6 box-element-for-total">
         <a  class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
         <hr>
         <h3>Order Summary</h3>
@@ -75,6 +76,8 @@
     }
 
     var form = document.getElementById('form')
+    csrftoken = form.getElementsByTagName("input")[0].value
+    console.log("New Token: ", csrftoken)
 
     form.addEventListener('submit', function(e){
         e.preventDefault()
