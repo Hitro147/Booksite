@@ -32,7 +32,7 @@
             <div class="wrap">
                 <h4 class="price inleft">${{product.price|floatformat:2}}</h4>
                 <button id="add-to-cart" data-product={{product.id}} data-action="add"
-                    class="inright btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                    class="inright btn btn-outline-secondary add-btn update-cart" onclick="addAlert()">Add to Cart</button>
                 <!-- <a class="btn btn-outline-success" href="#">View</a> -->
             </div>
         </div>
@@ -71,10 +71,10 @@
     {% endif %}
 </div>
 
-<!-- <script type="text/javascript">
-    document.getElementById('add-to-cart').addEventListener('click', function(){
-        alert('Item added to cart!');
-    })
-</script> -->
+<script type="text/javascript">
+    function addAlert(){
+        alert("Item added to cart!")
+    }
+</script>
 
 {% endblock content %}
